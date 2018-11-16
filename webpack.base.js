@@ -1,34 +1,33 @@
-const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const isModern = process.env.BROWSERSLIST_ENV === 'modern';
-const buildRoot = path.resolve(__dirname, './dist');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HappyPack = require('happypack');
 const os = require('os');
 const threadCount = Math.min(4, os.cpus().length - 1);
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-const styleLoaders = [
-  MiniCssExtractPlugin.loader, {
-    loader: 'css-loader',
-    options: {
-      importLoaders: 2
-    }
-  }, {
-    loader: 'postcss-loader',
-    options: {
-      plugins: () => [
-        require('autoprefixer')({ grid: !isModern })
-      ]
-    }
-  }];
+const path = require('path');
+const buildRoot = path.resolve(__dirname, './dist');
 
 module.exports = (env, argv) => {
   const devMode = argv.mode !== 'production';
 
+  const styleLoaders = [
+    MiniCssExtractPlugin.loader, {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 2
+      }
+    }, {
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [
+          require('autoprefixer')({ grid: true })
+        ]
+      }
+    }];
+
   let config = {
     output: {
-      path: path.join(buildRoot, isModern ? 'modern' : 'legacy'),
+      path: buildRoot,
+      publicPath: '/dist/',
       filename: '[name].js',
     },
     resolve: {
@@ -86,26 +85,7 @@ module.exports = (env, argv) => {
         id: 'babel-loader',
         threads: threadCount,
         loaders: ['babel-loader']
-      }),
-      new BundleAnalyzerPlugin({
-        analyzerMode: 'disabled',
-        generateStatsFile: true,
-        statsFilename: path.join(buildRoot, isModern ? 'modern' : 'legacy', './stats.json'),
-        statsOptions: {
-          hash: false,
-          version: false,
-          timings: false,
-          chunkOrigins: false,
-          modules: false,
-          cachedAssets: false,
-          children: false,
-          source: false,
-          errors: false,
-          errorDetails: false,
-          warnings: false,
-          exclude: []
-        }
-      }),
+      })
     ]
   };
 

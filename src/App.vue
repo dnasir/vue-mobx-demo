@@ -5,8 +5,8 @@
         <v-layout row wrap align-start justify-center>
           <v-flex xs12 sm8>
             <v-card>
-              <v-card-title primary-title>
-                <h1>Mobx + Vue demo</h1>
+              <v-card-title>
+                <h1>Vue + MobX demo</h1>
               </v-card-title>
               <v-container
                 fluid

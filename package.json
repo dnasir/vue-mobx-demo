@@ -4,13 +4,9 @@
   "description": "Demo app showcasing how MobX could be used for state management instead of Vuex in a Vue app.",
   "main": "index.js",
   "scripts": {
-    "serve": "webpack-dev-server --mode=development --progress --config webpack.web.js",
-    "build": "npm run build:modern && npm run build:legacy",
-    "build:legacy": "set BROWSERSLIST_ENV=legacy&&webpack --mode=development --progress --config webpack.web.js",
-    "build:modern": "set BROWSERSLIST_ENV=modern&&webpack --mode=development --progress --config webpack.web.js",
-    "build:prod": "npm run build:prod:modern && npm run build:prod:legacy",
-    "build:prod:legacy": "set BROWSERSLIST_ENV=legacy&&webpack --mode=production --progress --config webpack.web.js",
-    "build:prod:modern": "set BROWSERSLIST_ENV=modern&&webpack --mode=production --progress --config webpack.web.js",
+    "dev": "webpack-dev-server --mode=development --progress --config webpack.web.js",
+    "build": "webpack --mode=development --progress --config webpack.web.js",
+    "build:prod": "webpack --mode=production --progress --config webpack.web.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dzulqarnain Nasir <dzul1983@gmail.com>",

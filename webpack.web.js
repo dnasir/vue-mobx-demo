@@ -1,16 +1,13 @@
 const merge = require('webpack-merge');
-const baseConfig = require('./webpack.base');
-const isModern = process.env.BROWSERSLIST_ENV === 'modern';
 
-module.exports = (env, argv) => {
-  return merge(baseConfig(env, argv), {
+module.exports = (env, argv) =>
+  merge(require('./webpack.base')(env, argv), {
     entry: {
       'main': './src/index.ts',
-      'polyfills': isModern ? './polyfills.modern.ts' : './polyfills.legacy.ts'
+      'polyfills': './polyfills.ts'
     },
     externals: {
       'vue': 'window.Vue',
       'vuetify': 'window.Vuetify'
     }
   });
-};
