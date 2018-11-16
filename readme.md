@@ -6,4 +6,4 @@ This is an example of how MobX could be used for state management instead of Vue
 ## Instructions
 
 1. Run `npm install` to install dependencies.
-2. Run `npm run serve` to start web server.
+2. Run `npm run dev` to start web server.
