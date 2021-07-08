@@ -2,12 +2,6 @@ import Vue, { PluginObject } from 'vue';
 import { Product } from '../models/Product';
 import { observable } from 'mobx';
 
-declare module 'vue/types/vue' {
-  export interface Vue {
-    $productService: ProductService;
-  }
-}
-
 export class ProductService {
   @observable
   products: Product[] = [];
@@ -18,6 +12,12 @@ export class ProductService {
       new Product('Roccat Vulcan 120 Aimo', 149.99, 'https://cdn.mos.cms.futurecdn.net/ZpUroNQU5tcCBUWRiU5PW7-650-80.jpg'),
       new Product('Logitech G513', 112.99, 'https://cdn.mos.cms.futurecdn.net/MxYJv66BzooiE3udUkS68m-650-80.jpg')
     ];
+  }
+}
+
+declare module 'vue/types/vue' {
+  export interface Vue {
+    $productService: ProductService;
   }
 }
 
